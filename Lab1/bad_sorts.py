@@ -83,7 +83,7 @@ def measure_runtime(sorting_algorithm, L):
     end_time = time.time()
     return end_time - start_time
 
-list_lengths = [10, 50, 100, 200, 500, 1000]
+list_lengths = [100,500,1000,2000,5000,10000]
 num_runs = 10
 num_runs = 10
 max_value = 50000
