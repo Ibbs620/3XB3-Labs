@@ -3,8 +3,8 @@ This file corresponds to the first graded lab of 2XC3.
 Feel free to modify and/or add functions to this file.
 """
 import random
+import time
 
-# list lengths = [50 200 1000 10000 50000 100000]
 
 # Create a random list length "length" containing whole numbers between 0 and max_value inclusive
 def create_random_list(length, max_value):
@@ -69,3 +69,38 @@ def find_min_index(L, n):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
+
+
+#******************TESTING**********************************
+#******************TESTING**********************************
+#******************TESTING**********************************
+#******************TESTING**********************************
+
+
+def measure_runtime(sorting_algorithm, L):
+    start_time = time.time()
+    sorting_algorithm(L)
+    end_time = time.time()
+    return end_time - start_time
+
+list_lengths = [50, 200, 1000, 10000, 5000, 100000]
+num_runs = 10
+max_value = 50000
+results = {algo.__name__: [] for algo in [insertion_sort, bubble_sort, selection_sort]}
+
+for length in list_lengths:
+    for algorithm in [insertion_sort, bubble_sort, selection_sort]:
+        runtimes = [] #empty list for storing runtimes
+        for _ in range(num_runs):
+            L = create_random_list(length, max_value)
+            runtime = measure_runtime(algorithm, L.copy())
+            runtimes.append(runtime)  #adding to runtime list
+        results[algorithm.__name__].append(runtimes)
+
+
+print("List Length\tInsertion Sort\tBubble Sort\tSelection Sort")
+for i, length in enumerate(list_lengths):
+    insertion_mean = sum(results["insertion_sort"][i]) / num_runs
+    bubble_mean = sum(results["bubble_sort"][i]) / num_runs
+    selection_mean = sum(results["selection_sort"][i]) / num_runs
+    print(f"{length}\t\t{insertion_mean:.6f}\t\t{bubble_mean:.6f}\t\t{selection_mean:.6f}")
