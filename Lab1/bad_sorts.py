@@ -54,6 +54,18 @@ def bubble_sort(L):
                 swap(L, j, j+1)
 
 
+# Bubble sort 2
+def bubble_sort2(L):
+    n = len(L)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            if L[j] > L[j + 1]:
+                swap(L, j, j+1)
+                swapped = True
+        if not swapped:
+            break
+
 # ******************* Selection sort code *******************
 
 # Traditional Selection sort
