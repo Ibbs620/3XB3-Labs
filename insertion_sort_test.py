@@ -10,6 +10,6 @@ for ll in bs.list_lengths:
 
 for ll, results in runtimes.items():
     print("List length: ", ll)
-    print("Runtimes: ", "\t".join(results))
+    print("Runtimes: ", *results)
     print("---------------------------------------------")
 
