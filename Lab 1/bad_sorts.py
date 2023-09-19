@@ -83,7 +83,7 @@ def measure_runtime(sorting_algorithm, L):
     end_time = time.time()
     return end_time - start_time
 
-list_lengths = [50, 200, 1000, 10000, 5000, 100000]
+list_lengths = [50, 200, 1000, 10000]
 num_runs = 10
 max_value = 50000
 results = {algo.__name__: [] for algo in [insertion_sort, bubble_sort, selection_sort]}
