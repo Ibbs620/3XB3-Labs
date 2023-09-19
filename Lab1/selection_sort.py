@@ -67,5 +67,5 @@ for length in list_lengths:
 
 print("List Length Selection Sort")
 for i, length in enumerate(list_lengths):
-    selection_mean = sum(results["selection_sort"][i]) / num_runs
-    print(f"{length}\t\t{selection_mean:.6f}")
+    selection = results["selection_sort"][i]
+    print(f"{length}\t\t{selection}")
