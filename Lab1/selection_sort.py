@@ -38,6 +38,25 @@ def find_min_index(L, n):
             min_index = i
     return min_index
 
+# Selection sort 2
+
+
+def selection_sort2(L):
+    n = len(L)
+    for i in range(n // 2):
+        min_idx, max_idx = i, i
+        for j in range(i, n - i):
+            if L[j] < L[min_idx]:
+                min_idx = j
+            elif L[j] > L[max_idx]:
+                max_idx = j
+        L[i], L[min_idx] = L[min_idx], L[i]
+        if max_idx == i:
+            max_idx = min_idx  # Adjust max index if it's at the beginning
+        L[n - i - 1], L[max_idx] = L[max_idx], L[n - i - 1]
+
+
+
 #******************TESTING**********************************
 #******************TESTING**********************************
 #******************TESTING**********************************
@@ -50,13 +69,13 @@ def measure_runtime(sorting_algorithm, L):
     end_time = time.time()
     return end_time - start_time
 
-list_lengths = [10, 50, 100, 200, 500, 1000]
+list_lengths = [100, 500, 1000, 2000, 5000, 10000]
 num_runs = 10
 max_value = 50000
-results = {algo.__name__: [] for algo in [ selection_sort]}
+results = {algo.__name__: [] for algo in [ selection_sort2]}
 
 for length in list_lengths:
-    for algorithm in [ selection_sort]:
+    for algorithm in [ selection_sort2]:
         runtimes = [] #empty list for storing runtimes
         for _ in range(num_runs):
             L = create_random_list(length, max_value)
@@ -67,5 +86,5 @@ for length in list_lengths:
 
 print("List Length Selection Sort")
 for i, length in enumerate(list_lengths):
-    selection = results["selection_sort"][i]
+    selection = results["selection_sort2"][i]
     print(f"{length}\t\t{selection}")
