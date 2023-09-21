@@ -14,6 +14,7 @@ max_value = 50000
 results = {algo.__name__: [] for algo in [ bs.bubble_sort2]}
 
 # ------------------------------------BUBBLE SORT TRADITIONAL---------------------------------
+
 for length in list_lengths:
     for algorithm in [ bs.bubble_sort]:
         runtimes = [] #empty list for storing runtimes
