@@ -48,8 +48,7 @@ for ll, results in runtimes_new.items():
 for s in swaps:
     for i in range(bs.num_runs):
         L1 = bs.create_near_sorted_list(1000, bs.max_value, s)
-        L2 = L1.copy()
-        time_taken = bs.measure_runtime(insertion_sort_new, L2)
+        time_taken = bs.measure_runtime(insertion_sort_new, L1)
         runtimes_swap[s].append(round(time_taken, 6))
 
 print("**********NEW INSERTION SORT (SWAP TEST)***********")
