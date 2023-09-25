@@ -29,6 +29,7 @@ def swap(L, i, j):
 
 # ******************* Insertion sort code *******************
 
+
 # This is the traditional implementation of Insertion Sort.
 def insertion_sort(L):
     for i in range(1, len(L)):
@@ -37,8 +38,8 @@ def insertion_sort(L):
 
 def insert(L, i):
     while i > 0:
-        if L[i] < L[i-1]:
-            swap(L, i-1, i)
+        if L[i] < L[i - 1]:
+            swap(L, i - 1, i)
             i -= 1
         else:
             return
@@ -46,12 +47,13 @@ def insert(L, i):
 
 # ******************* Bubble sort code *******************
 
+
 # Traditional Bubble sort
 def bubble_sort(L):
     for i in range(len(L)):
         for j in range(len(L) - 1):
-            if L[j] > L[j+1]:
-                swap(L, j, j+1)
+            if L[j] > L[j + 1]:
+                swap(L, j, j + 1)
 
 
 # Bubble sort 2
@@ -61,12 +63,14 @@ def bubble_sort2(L):
         swapped = False
         for j in range(0, n - i - 1):
             if L[j] > L[j + 1]:
-                swap(L, j, j+1)
+                swap(L, j, j + 1)
                 swapped = True
         if not swapped:
             break
 
+
 # ******************* Selection sort code *******************
+
 
 # Traditional Selection sort
 def selection_sort(L):
@@ -77,16 +81,16 @@ def selection_sort(L):
 
 def find_min_index(L, n):
     min_index = n
-    for i in range(n+1, len(L)):
+    for i in range(n + 1, len(L)):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
 
 
-#******************TESTING**********************************
-#******************TESTING**********************************
-#******************TESTING**********************************
-#******************TESTING**********************************
+# ******************TESTING**********************************
+# ******************TESTING**********************************
+# ******************TESTING**********************************
+# ******************TESTING**********************************
 
 
 def measure_runtime(sorting_algorithm, L):
@@ -95,11 +99,12 @@ def measure_runtime(sorting_algorithm, L):
     end_time = time.time()
     return end_time - start_time
 
-list_lengths = [100,500,1000,2000,5000,10000]
-num_runs = 10
-num_runs = 10
-max_value = 50000
-results = {algo.__name__: [] for algo in [insertion_sort, bubble_sort, selection_sort]}
+
+# list_lengths = [100,500,1000,2000,5000,10000]
+# num_runs = 10
+# num_runs = 10
+# max_value = 50000
+# results = {algo.__name__: [] for algo in [insertion_sort, bubble_sort, selection_sort]}
 
 # for length in list_lengths:
 #     for algorithm in [insertion_sort, bubble_sort, selection_sort]:
