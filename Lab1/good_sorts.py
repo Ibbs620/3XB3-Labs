@@ -11,6 +11,8 @@ Author: Vincent Maccio
 """
 
 # ************ Quick Sort ************
+import math
+
 def quicksort(L):
     copy = quicksort_copy(L)
     for i in range(len(L)):
