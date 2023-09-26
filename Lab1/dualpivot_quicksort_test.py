@@ -46,16 +46,6 @@ def dual_partition(L, low, high):
 
     return i, j
 
-# Test the dual pivot quicksort with a random list
-if __name__ == '__main__':
-    random.seed(42)
-    test_list = [random.randint(1, 100) for _ in range(20)]
-    print("Original List:")
-    print(test_list)
-    dual_quicksort(test_list)
-    print("Sorted List:")
-    print(test_list)
-
 
 def measure_runtime(sorting_algorithm, L):
     start_time = time.time()
