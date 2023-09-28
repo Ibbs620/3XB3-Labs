@@ -27,8 +27,8 @@ for s in swaps:
         runtimes_exp5[s].append(round(time_taken, 6))
 
 print("********** HEAP SORT SWAP TEST ***********")
-for ll, results in runtimes_exp5.items():
-    print("Swaps: ", ll)
+for s, results in runtimes_exp5.items():
+    print("Swaps: ", s)
     print("Runtimes: ", *results)
     print("---------------------------------------------")
 
