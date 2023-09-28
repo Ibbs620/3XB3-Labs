@@ -27,3 +27,9 @@ def measure_runtime(sorting_algorithm, L):
     sorting_algorithm(L)
     end_time = time.time()
     return end_time - start_time
+
+# Constants
+num_runs = 10
+max_value = 50000
+list_lengths_gs = [500, 1000, 2000, 5000, 10000, 50000]
+list_lengths_bs = [100, 500, 1000, 2000, 5000, 10000]
