@@ -17,13 +17,15 @@ def create_near_sorted_list(length, max_value, swaps):
         swap(L, r1, r2)
     return L
 
+
 # I have created this function to make the sorting algorithm code read easier
 def swap(L, i, j):
     L[i], L[j] = L[j], L[i]
 
+
 # Returns the runtime of a sorting algorithm on L
 def measure_runtime(sorting_algorithm, L):
-    start_time = time.time()
+    start_time = time.perf_counter()
     sorting_algorithm(L)
-    end_time = time.time()
+    end_time = time.perf_counter()
     return end_time - start_time
