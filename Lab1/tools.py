@@ -27,5 +27,16 @@ def swap(L, i, j):
 def measure_runtime(sorting_algorithm, L):
     start_time = time.perf_counter()
     sorting_algorithm(L)
+<<<<<<< HEAD
     end_time = time.perf_counter()
     return end_time - start_time
+=======
+    end_time = time.time()
+    return end_time - start_time
+
+# Constants
+num_runs = 10
+max_value = 50000
+list_lengths_gs = [500, 1000, 2000, 5000, 10000, 50000]
+list_lengths_bs = [100, 500, 1000, 2000, 5000, 10000]
+>>>>>>> de9ff3848ebf11472eee5835854b62c36c846d40
