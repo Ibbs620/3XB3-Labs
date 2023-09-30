@@ -2,7 +2,6 @@
 import random
 import time
 
-
 def create_random_list(length, max_value):
     return [random.randint(0, max_value) for _ in range(length)]
 
@@ -25,18 +24,18 @@ def swap(L, i, j):
 
 # Returns the runtime of a sorting algorithm on L
 def measure_runtime(sorting_algorithm, L):
-    start_time = time.perf_counter()
+    start_time = time.time()
     sorting_algorithm(L)
-<<<<<<< HEAD
-    end_time = time.perf_counter()
-    return end_time - start_time
-=======
     end_time = time.time()
     return end_time - start_time
+
+# Creates a dictionary for storing results
+def initialize_results(x_axis):
+    return {x : [] for x in x_axis}
 
 # Constants
 num_runs = 10
 max_value = 50000
 list_lengths_gs = [500, 1000, 2000, 5000, 10000, 50000]
 list_lengths_bs = [100, 500, 1000, 2000, 5000, 10000]
->>>>>>> de9ff3848ebf11472eee5835854b62c36c846d40
+swaps = [10, 50, 100, 500, 1000, 5000]
