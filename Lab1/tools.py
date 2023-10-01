@@ -33,9 +33,19 @@ def measure_runtime(sorting_algorithm, L):
 def initialize_results(x_axis):
     return {x : [] for x in x_axis}
 
+# Prints results of a test
+def print_results(title, results, axis_title):
+    print("-" * 20, title, "-" * 20)
+    print(f"{axis_title}\t\tSeconds taken")
+    for value, data in results.items():
+        data = [round(x, 6) for x in data]
+        print(f"{value}\t\t{data}")
+    print()
+
 # Constants
 num_runs = 10
 max_value = 50000
 list_lengths_gs = [500, 1000, 2000, 5000, 10000, 50000]
 list_lengths_bs = [100, 500, 1000, 2000, 5000, 10000]
+fixed_list_length = 1000
 swaps = [10, 50, 100, 500, 1000, 5000]

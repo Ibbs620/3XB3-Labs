@@ -56,19 +56,6 @@ def bubble_sort(L):
                 swap(L, j, j + 1)
 
 
-# Bubble sort 2
-def bubble_sort2(L):
-    n = len(L)
-    for i in range(n):
-        swapped = False
-        for j in range(0, n - i - 1):
-            if L[j] > L[j + 1]:
-                swap(L, j, j + 1)
-                swapped = True
-        if not swapped:
-            break
-
-
 # ******************* Selection sort code *******************
 
 
@@ -85,38 +72,3 @@ def find_min_index(L, n):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
-
-
-# ******************TESTING**********************************
-# ******************TESTING**********************************
-# ******************TESTING**********************************
-# ******************TESTING**********************************
-
-
-def measure_runtime(sorting_algorithm, L):
-    start_time = time.time()
-    sorting_algorithm(L)
-    end_time = time.time()
-    return end_time - start_time
-
-
-num_runs = 10
-max_value = 50000
-results = {algo.__name__: [] for algo in [insertion_sort, bubble_sort, selection_sort]}
-
-# for length in list_lengths:
-#     for algorithm in [insertion_sort, bubble_sort, selection_sort]:
-#         runtimes = [] #empty list for storing runtimes
-#         for _ in range(num_runs):
-#             L = create_random_list(length, max_value)
-#             runtime = measure_runtime(algorithm, L.copy())
-#             runtimes.append(runtime)  #adding to runtime list
-#         results[algorithm.__name__].append(runtimes)
-
-
-# print("List Length\tInsertion Sort\tBubble Sort\tSelection Sort")
-# for i, length in enumerate(list_lengths):
-#     insertion_mean = sum(results["insertion_sort"][i]) / num_runs
-#     bubble_mean = sum(results["bubble_sort"][i]) / num_runs
-#     selection_mean = sum(results["selection_sort"][i]) / num_runs
-#     print(f"{length}\t\t{insertion_mean:.6f}\t\t{bubble_mean:.6f}\t\t{selection_mean:.6f}")

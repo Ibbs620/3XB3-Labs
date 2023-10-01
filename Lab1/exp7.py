@@ -1,6 +1,6 @@
 import tools
 
-runtimes = {x : [] for x in tools.list_lengths_gs}
+runtimes = tools.initialize_results(tools.list_lengths_gs)
 
 def mergesort(L):
     n = len(L)
@@ -39,11 +39,6 @@ for ll in tools.list_lengths_gs:
         time_taken = tools.measure_runtime(mergesort, L)
         runtimes[ll].append(round(time_taken, 6))   
 
-L = tools.create_random_list(40, 100)
-print("********** ITERATIVE MERGESORT TEST ***********")
-for ll, results in runtimes.items():
-    print("Length: ", ll)
-    print("Runtimes: ", *results)
-    print("---------------------------------------------")
+tools.print_results("Iterative Merge Sort Test", runtimes, "List Length")
 
     

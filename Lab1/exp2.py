@@ -2,7 +2,7 @@ import tools
 
 # BUBBLE SORT
 
-results = tools.initialize_results(tools.list_lengths_bs)
+bb_results = tools.initialize_results(tools.list_lengths_bs)
 
 def bubble_sort2(L):
     n = len(L)
@@ -22,16 +22,13 @@ for length in tools.list_lengths_bs:
             L = tools.create_random_list(length, tools.max_value)
             runtime = tools.measure_runtime(algorithm, L.copy())
             runtimes.append(runtime)  # adding to runtime list
-        results[length] = runtimes
+        bb_results[length] = runtimes
 
-print("List Length Bubble Sort 2")
-for length in tools.list_lengths_bs:
-    selection = results[length]
-    print(f"{length}\t\t{selection}")
+tools.print_results("Bubble Sort", bb_results, "List Length")
 
 # INSERTION SORT
 
-results = tools.initialize_results(tools.list_lengths_bs)
+is_results = tools.initialize_results(tools.list_lengths_bs)
 
 def insertion_sort_new(L):
     for i in range(1, len(L)):
@@ -51,13 +48,9 @@ for ll in tools.list_lengths_bs:
     for i in range(tools.num_runs):
         L1 = tools.create_random_list(ll, tools.max_value)
         time_taken = tools.measure_runtime(insertion_sort_new, L1.copy())
-        results[ll].append(round(time_taken, 6))
+        is_results[ll].append(round(time_taken, 6))
 
-print("**********INSERTION SORT NEW***********")
-for ll, results in results.items():
-    print("List length: ", ll)
-    print("Runtimes: ", *results)
-    print("---------------------------------------------")
+tools.print_results("New Insertion Sort", is_results, "List Length")
 
 # SELECTION SORT
 
@@ -75,7 +68,7 @@ def selection_sort2(L):
             max_idx = min_idx  # Adjust max index if it's at the beginning
         L[n - i - 1], L[max_idx] = L[max_idx], L[n - i - 1]
 
-results = tools.initialize_results(tools.list_lengths_bs)
+ss_results = tools.initialize_results(tools.list_lengths_bs)
 
 for length in tools.list_lengths_bs:
     runtimes = [] #empty list for storing runtimes
@@ -83,9 +76,6 @@ for length in tools.list_lengths_bs:
         L = tools.create_random_list(length, tools.max_value)
         runtime = tools.measure_runtime(algorithm, L.copy())
         runtimes.append(runtime)  #adding to runtime list
-    results[length] = runtimes
+    ss_results[length] = runtimes
 
-print("List Length Selection Sort")
-for length in tools.list_lengths_bs:
-    selection = results[length]
-    print(f"{length}\t\t{selection}")
+tools.print_results("New Selection Sort", ss_results, "List Length")

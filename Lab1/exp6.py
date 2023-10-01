@@ -1,10 +1,4 @@
-import time
-import random
-
-# Create a random list length "length" containing whole numbers between 0 and max_value inclusive
-def create_random_list(length, max_value):
-    return [random.randint(0, max_value) for _ in range(length)]
-
+import tools
 
 def dual_quicksort(L):
     dual_quicksort_helper(L, 0, len(L) - 1)
@@ -46,28 +40,15 @@ def dual_partition(L, low, high):
 
     return i, j
 
+results_dual_pivot = tools.initialize_results(tools.list_lengths_gs)
 
-def measure_runtime(sorting_algorithm, L):
-    start_time = time.time()
-    sorting_algorithm(L)
-    end_time = time.time()
-    return end_time - start_time
-
-list_lengths = [500, 1000, 2000, 5000, 10000, 50000]
-num_runs = 10
-max_value = 50000
-results_dual_pivot = {algo.__name__: [] for algo in [dual_quicksort]}
-
-for length in list_lengths:
+for length in tools.list_lengths_gs:
     for algorithm in [dual_quicksort]:
         runtimes = []  # empty list for storing runtimes
-        for _ in range(num_runs):
-            L = create_random_list(length, max_value)
-            runtime = measure_runtime(algorithm, L.copy())
+        for _ in range(tools.num_runs):
+            L = tools.create_random_list(length, tools.max_value)
+            runtime = tools.measure_runtime(algorithm, L.copy())
             runtimes.append(runtime)  # adding to runtime list
-        results_dual_pivot[algorithm.__name__].append(runtimes)
+        results_dual_pivot[length] = runtimes
 
-print("List Length\tDual Pivot QuickSort")
-for i, length in enumerate(list_lengths):
-    dual_pivot_selection = results_dual_pivot["dual_quicksort"][i]
-    print(f"{length}\t\t{dual_pivot_selection}")
+tools.print_results("Dual-Pivot Quick Sort Test", results_dual_pivot, "List Length")
