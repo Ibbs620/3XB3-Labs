@@ -2,7 +2,6 @@ import tools
 from bad_sorts import insertion_sort
 from good_sorts import quicksort, mergesort
 
-i = 10
 list_lengths = [i for i in range(10, 101, 10)]
 
 num_runs = 10
