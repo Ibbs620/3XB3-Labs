@@ -121,7 +121,7 @@ def DFS2(G, node1, node2):
 def BFS3(G, start):
     Q = [start]
     pred = {}
-    while len(Q):
+    while Q:
         current = Q[0]
         Q = Q[1:]
         for node in G.adjacent_nodes(current):
@@ -130,3 +130,13 @@ def BFS3(G, start):
                 pred[node] = current
     return pred
 
+def DFS3(G, start):
+    S = [start]
+    pred = {}
+    while S:
+        current = S.pop()
+        for node in G.adjacent_nodes(current):
+            if node not in pred.keys() and node != start:
+                S.append(node)
+                pred[node] = current
+    return pred
