@@ -123,3 +123,28 @@ def DFS2(G, node1, node2):
     node_path = []
     
     return node_path
+
+# BFS3 and DFS3 implementations
+
+def BFS3(G, start):
+    Q = [start]
+    pred = {}
+    while Q:
+        current = Q[0]
+        Q = Q[1:]
+        for node in G.adjacent_nodes(current):
+            if node not in pred.keys() and node != start:
+                Q.append(node)
+                pred[node] = current
+    return pred
+
+def DFS3(G, start):
+    S = [start]
+    pred = {}
+    while S:
+        current = S.pop()
+        for node in G.adjacent_nodes(current):
+            if node not in pred.keys() and node != start:
+                S.append(node)
+                pred[node] = current
+    return pred
