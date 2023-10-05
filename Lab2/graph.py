@@ -95,20 +95,28 @@ def MVC(G):
 
 def BFS2(G, node1, node2):
     Q = deque([node1])
-    marked = {node1: None} 
+    marked = {node1 : True}
+    parent = {node1 : None}
     node_path = []
 
-    while Q: 
+    #Initializing all nodes except node1 to False
+    for node in G.adj: 
+        if node != node1: 
+            marked[node] = False
+            
+    while len(Q) != 0:
         current_node = Q.popleft()
-        if current_node == node2:
-            while current_node is not None: 
-                node_path.insert(0, current_node)
-                current_node = marked[current_node]
-            return node_path 
-        for neighbor in G.adj[current_node]:
-            if neighbor not in marked:  
-                marked[neighbor] = current_node  
-                Q.append(neighbor) 
+        #Marking all child nodes of current_node as visited
+        for node in G.adj[current_node]:
+            if not marked[node]:
+                Q.append(node)
+                marked[node] = True
+                parent[node] = current_node
+                #Reconstructing the path from node1 to node2 using the parent relation  
+                if node == node2: 
+                    while node is not None: 
+                        node_path.insert(0, node)
+                        node = parent[node]
     return node_path   
 
 def DFS2(G, node1, node2):
