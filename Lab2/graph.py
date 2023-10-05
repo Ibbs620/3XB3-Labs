@@ -94,7 +94,24 @@ def MVC(G):
 # DFS2 & BFS2 implementation
 
 def BFS2(G, node1, node2):
-    return None
+    Q = deque([node1])
+    marked = {node1: None} 
+    node_path = []
+
+    while Q: 
+        current_node = Q.popleft()
+        if current_node == node2:
+            while current_node is not None: 
+                node_path.insert(0, current_node)
+                current_node = marked[current_node]
+            return node_path 
+        for neighbor in G.adj[current_node]:
+            if neighbor not in marked:  
+                marked[neighbor] = current_node  
+                Q.append(neighbor) 
+    return node_path   
 
 def DFS2(G, node1, node2):
-    return None
+    node_path = []
+    
+    return node_path
