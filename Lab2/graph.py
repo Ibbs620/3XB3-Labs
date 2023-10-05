@@ -93,3 +93,8 @@ def MVC(G):
 
 # DFS2 & BFS2 implementation
 
+def BFS2(G, node1, node2):
+    return None
+
+def DFS2(G, node1, node2):
+    return None
