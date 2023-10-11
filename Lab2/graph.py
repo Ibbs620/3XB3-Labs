@@ -148,3 +148,26 @@ def DFS3(G, start):
                 S.append(node)
                 pred[node] = current
     return pred
+
+def has_cycle(G):
+    def DFS_cycle(node, parent):
+        marked[node] = True
+        for neighbor in G.adj[node]:
+            if not marked[neighbor]:
+                if DFS_cycle(neighbor, node):
+                    return True
+            elif parent != neighbor:
+                return True
+        return False
+
+    marked = {node: False for node in G.adj}
+    for node in G.adj:
+        if not marked[node]:
+            if DFS_cycle(node, None):
+                return True
+    return False
+
+def is_connected(G):
+    start_node = list(G.adj.keys())[0]  # Choose any node as the starting point
+    reachable = BFS3(G, start_node)  # Or use DFS3
+    return all(reachable.values())
