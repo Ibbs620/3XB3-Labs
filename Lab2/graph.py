@@ -26,7 +26,6 @@ class Graph:
         return len()
 
 
-#Breadth First Search
 def BFS(G, node1, node2):
     Q = deque([node1])
     marked = {node1 : True}
@@ -91,8 +90,7 @@ def MVC(G):
     return min_cover
 
 
-# DFS2 & BFS2 implementation
-
+#Breadth First Search returning path 
 def BFS2(G, node1, node2):
     Q = deque([node1])
     marked = {node1 : True}
@@ -119,6 +117,8 @@ def BFS2(G, node1, node2):
                         node = parent[node]
     return node_path   
 
+
+#Depth First Search returning path 
 def DFS2(G, node1, node2):
     node_path = []
     
