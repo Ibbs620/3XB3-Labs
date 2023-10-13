@@ -1,4 +1,5 @@
 from collections import deque
+import random
 
 #Undirected graph using an adjacency list
 class Graph:
@@ -24,6 +25,11 @@ class Graph:
 
     def number_of_nodes():
         return len()
+    
+class UndirectedGraph(Graph):
+    def add_edge(self, node1, node2):
+        if node2 not in self.adj[node1]:
+            self.adj[node1].append(node2)
 
 
 def BFS(G, node1, node2):
@@ -182,3 +188,20 @@ def is_connected(G):
     start_node = list(G.adj.keys())[0]  # Choose any node as the starting point
     reachable = BFS3(G, start_node)  # Or use DFS3
     return all(reachable.values())
+
+def create_random_graph(nodes, edges):
+    edges = min(nodes * (nodes - 1), edges) # cap number of edges
+    possible_edges = []
+    for i in range(nodes):
+        for j in range(nodes):
+            if i == j: 
+                continue # avoid self loops
+            possible_edges.append([i, j])
+    G = UndirectedGraph(nodes)
+    random.shuffle(possible_edges)
+    for i in range(edges):
+        edge = possible_edges.pop()
+        G.add_edge(edge[0], edge[1])
+    return G
+
+

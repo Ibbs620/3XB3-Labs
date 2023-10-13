@@ -9,6 +9,7 @@ G.add_edge(1,3)
 G.add_edge(3,4)
 G.add_edge(4,5)
 
+# DFS3 and BFS3 testing
 correct_bfs_pred = {2 : 1, 3 : 1, 4 : 2, 5 : 3, 6 : 4}
 bfs_pred = BFS3(G, 1)
 dfs_pred = DFS3(G, 1)
@@ -26,3 +27,6 @@ assert correct_path_bfs == bfs_path
 assert correct_path_dfs == dfs_path
 print(dfs_path)
 print(bfs_path)
+
+# CHECK create_random_graph() OUTPUT
+print(create_random_graph(10, 15).adj)
