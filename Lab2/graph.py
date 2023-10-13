@@ -58,7 +58,7 @@ def DFS(G, node1, node2):
                     return True
                 S.append(node)
     return False
-
+ 
 
 #Use the methods below to determine minimum Vertex Covers
 def add_to_each(sets, element):
@@ -96,12 +96,10 @@ def BFS2(G, node1, node2):
     marked = {node1 : True}
     parent = {node1 : None}
     node_path = []
-
     #Initializing all nodes except node1 to False
     for node in G.adj: 
         if node != node1: 
             marked[node] = False
-            
     while len(Q) != 0:
         current_node = Q.popleft()
         #Marking all child nodes of current_node as visited
@@ -120,9 +118,22 @@ def BFS2(G, node1, node2):
 
 #Depth First Search returning path 
 def DFS2(G, node1, node2):
-    node_path = []
-    
-    return node_path
+    # Initialize the stack with the starting node and its path    
+    S = [(node1, [node1])]
+    marked = {}
+    for node in G.adj:
+        marked[node] = False
+    while len(S) != 0:
+        current_node, path = S.pop()
+        if not marked[current_node]:
+            marked[current_node] = True
+            for node in G.adj[current_node]:
+                # If target node is found, return the path
+                if node == node2:
+                    return path + [node2]
+                # Else, push the adjacent node to the stack with its path
+                S.append((node, path + [node]))
+    return []
 
 # BFS3 and DFS3 implementations
 
