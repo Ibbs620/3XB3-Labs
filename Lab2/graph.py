@@ -238,3 +238,4 @@ def approx1(G):
         
         # Add V to C
         C.add(max_degree_vertex)
+    return C
