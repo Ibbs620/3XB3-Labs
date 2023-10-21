@@ -25,11 +25,6 @@ class Graph:
 
     def number_of_nodes():
         return len()
-    
-class UndirectedGraph(Graph):
-    def add_edge(self, node1, node2):
-        if node2 not in self.adj[node1]:
-            self.adj[node1].append(node2)
 
 
 def BFS(G, node1, node2):
@@ -95,6 +90,10 @@ def MVC(G):
                 min_cover = subset
     return min_cover
 
+
+############################################
+# PRE-EXPERIMENT IMPLEMENTATIONS 
+############################################
 
 #Breadth First Search returning path 
 def BFS2(G, node1, node2):
@@ -189,6 +188,17 @@ def is_connected(G):
     reachable = BFS3(G, start_node)  # Or use DFS3
     return all(reachable.values())
 
+############################################
+# EXPERIMENT 1 
+############################################
+
+# Directed graph class
+class DirectedGraph(Graph):
+    def add_edge(self, node1, node2):
+        if node2 not in self.adj[node1]:
+            self.adj[node1].append(node2)
+
+# Random directed graph generator
 def create_random_graph(nodes, edges):
     edges = min(nodes * (nodes - 1), edges) # cap number of edges
     possible_edges = []
@@ -197,11 +207,34 @@ def create_random_graph(nodes, edges):
             if i == j: 
                 continue # avoid self loops
             possible_edges.append([i, j])
-    G = UndirectedGraph(nodes)
+    G = DirectedGraph(nodes)
     random.shuffle(possible_edges)
     for i in range(edges):
         edge = possible_edges.pop()
         G.add_edge(edge[0], edge[1])
     return G
 
+############################################
+# EXPERIMENT 2
+############################################
 
+############################################
+# VERTEX COVER APPROXIMATIONS
+############################################
+
+def approx1(G):
+    # C := {}
+    C = set()
+
+    while not is_vertex_cover(G, C):
+        # Find vertex V with max degree
+        max_degree_vertex = 0
+        max_degree = 0
+        for vertex, edges in G.adj.values():
+            degree = len(edges)
+            if degree > max_degree:
+                max_degree = degree
+                max_degree_vertex = vertex
+        
+        # Add V to C
+        C.add(max_degree_vertex)
