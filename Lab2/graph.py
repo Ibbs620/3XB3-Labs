@@ -225,17 +225,21 @@ def create_random_graph(nodes, edges):
 def approx1(G):
     # C := {}
     C = set()
-
+    adj = G.adj.copy()
     while not is_vertex_cover(G, C):
         # Find vertex V with max degree
-        max_degree_vertex = 0
+        V = 0
         max_degree = 0
-        for vertex, edges in G.adj.values():
+        for vertex, edges in adj.items():
             degree = len(edges)
             if degree > max_degree:
                 max_degree = degree
-                max_degree_vertex = vertex
+                V = vertex
         
         # Add V to C
-        C.add(max_degree_vertex)
+        C.add(V)
+        # Delete all edges incident to V
+        for vertex in adj[V]:
+            adj[vertex].remove(V)
+        adj[V] = []
     return C
