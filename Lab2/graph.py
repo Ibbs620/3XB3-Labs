@@ -243,3 +243,19 @@ def approx1(G):
             adj[vertex].remove(V)
         adj[V] = []
     return C
+
+def approx2(G):
+    C = set()  # Initialize an empty set C
+    available_vertices = list(G.adj.keys())  
+    
+    while available_vertices:  
+        v = random.choice(available_vertices)  # Random vertex from available vertices
+        C.add(v)  # Add v to C
+        available_vertices.remove(v)  # Remove v from the available vertices list
+
+        # Remove all edges incident to node v from G
+        incident_edges = list(G.adj[v])
+        for u in incident_edges:
+            G.remove_edge(u, v)
+
+    return C  # Return the Vertex Cover set C
