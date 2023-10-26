@@ -256,6 +256,32 @@ def approx2(G):
 
     return C  # Return the Vertex Cover set C
 
+def approx3(G):
+    C = []
+  
+    graph_copy = Graph(len(G.adj))
+    for node in G.adj:
+        for neighbor in G.adj[node]:
+            if not graph_copy.are_connected(node, neighbor):
+                graph_copy.add_edge(node, neighbor)
+
+    # POSSIBLY CAN BE CHANGED TO "while not is_vertex_cover(G, C)"
+    while any(graph_copy.adjacent_nodes(node) for node in graph_copy.adj):
+        # Get any edge (u, v) from the graph
+        u = next(node for node in graph_copy.adj if graph_copy.adjacent_nodes(node))
+        v = graph_copy.adjacent_nodes(u)[0]
+
+        # Add u and v to the vertex cover
+        C.append(u)
+        C.append(v)
+        # Remove u, v, and all their incident edges from the graph
+        del graph_copy.adj[u]
+        del graph_copy.adj[v]
+        for node in graph_copy.adj:
+            graph_copy.adj[node] = [neighbor for neighbor in graph_copy.adj[node] if neighbor != u and neighbor != v]
+
+    return C
+
 ############################################
 # MINIMAL INDEPENDANT SET
 ############################################
