@@ -165,23 +165,50 @@ def DFS3(G, start):
                 pred[node] = current
     return pred
 
-def has_cycle(G):
-    def DFS_cycle(node, parent):
-        marked[node] = True
-        for neighbor in G.adj[node]:
-            if not marked[neighbor]:
-                if DFS_cycle(neighbor, node):
-                    return True
-            elif parent != neighbor:
-                return True
-        return False
+# def has_cycle(G):
+#     def DFS_cycle(node, parent):
+#         marked[node] = True
+#         for neighbor in G.adj[node]:
+#             if not marked[neighbor]:
+#                 if DFS_cycle(neighbor, node):
+#                     return True
+#             elif parent != neighbor:
+#                 return True
+#         return False
 
-    marked = {node: False for node in G.adj}
+#     marked = {node: False for node in G.adj}
+#     for node in G.adj:
+#         if not marked[node]:
+#             if DFS_cycle(node, None):
+#                 return True
+#     return False
+
+def has_cycle(G):
+    visited = {}
+    parent = {}
+    # The stack will store (node, parent) pairs
+    stack = []
     for node in G.adj:
-        if not marked[node]:
-            if DFS_cycle(node, None):
-                return True
+        visited[node] = False
+        parent[node] = None
+
+    for start_node in G.adj:
+        if not visited[start_node]:
+            stack.append((start_node, None))
+
+            while stack:
+                node, parent_node = stack.pop()
+                visited[node] = True
+                parent[node] = parent_node
+
+                for neighbor in G.adj[node]:
+                    if not visited[neighbor]:
+                        stack.append((neighbor, node))
+                    elif parent[node] != neighbor:
+                        return True
+                        
     return False
+
 
 def is_connected(G):
     start_node = list(G.adj.keys())[0]  # Choose any node as the starting point
@@ -265,8 +292,7 @@ def approx3(G):
             if not graph_copy.are_connected(node, neighbor):
                 graph_copy.add_edge(node, neighbor)
 
-    # POSSIBLY CAN BE CHANGED TO "while not is_vertex_cover(G, C)"
-    while any(graph_copy.adjacent_nodes(node) for node in graph_copy.adj):
+    while not is_vertex_cover(G, C):
         # Get any edge (u, v) from the graph
         u = next(node for node in graph_copy.adj if graph_copy.adjacent_nodes(node))
         v = graph_copy.adjacent_nodes(u)[0]
