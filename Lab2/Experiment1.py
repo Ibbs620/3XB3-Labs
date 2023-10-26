@@ -30,7 +30,7 @@ from graph import *
 import matplotlib.pyplot as plt
 
 def experiment_1(num_nodes, num_graphs_per_edge):
-    edge_counts = list(range(100, 2100, 100))  # 100, 200, ..., 2000
+    edge_counts = list(range(100, 2100, 100))
     cycle_probabilities = []
 
     for edges in edge_counts:
@@ -41,7 +41,6 @@ def experiment_1(num_nodes, num_graphs_per_edge):
                 cycle_count += 1
         cycle_probabilities.append(cycle_count / num_graphs_per_edge)
 
-    # Plot the results
     plt.plot(edge_counts, cycle_probabilities, marker='o')
     plt.xlabel('Number of Edges')
     plt.ylabel('Probability of Having a Cycle')
