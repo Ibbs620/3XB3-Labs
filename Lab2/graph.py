@@ -209,6 +209,28 @@ def has_cycle(G):
                         
     return False
 
+def DFS_cycle(G, v, marked, in_path):
+        marked[v] = True
+        in_path[v] = True
+        for neighbour in G.adj[v]:
+            if marked[neighbour] == False:
+                if DFS_cycle(G, neighbour, marked, in_path) == True:
+                    return True
+            elif in_path[neighbour] == True:
+                return True
+
+        in_path[v] = False
+        return False
+
+def has_cycle(G):
+    marked = [False] * G.number_of_nodes()
+    in_path = [False] * G.number_of_nodes()
+    for node in range(G.number_of_nodes()):
+        if marked[node] == False:
+            if DFS_cycle(G, node, marked, in_path) == True:
+                return True
+    return False
+
 
 def is_connected(G):
     start_node = list(G.adj.keys())[0]  # Choose any node as the starting point
