@@ -4,7 +4,7 @@ from graph import *
 def experiment_1(num_nodes, max_edges, m=1000):
     results = {}
 
-    # Generate edge counts from 100 to 2000 in increments of 100
+    # Generate edge counts from 100 to max_edges in increments of 100
     edge_counts = list(range(100, max_edges+1, 100))
     
     for num_edges in edge_counts:
