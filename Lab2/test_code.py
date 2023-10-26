@@ -37,3 +37,16 @@ print(create_random_graph(10, 15).adj)
 correct_VC1 = {1, 3, 4}
 VC1 = approx1(G)
 assert VC1 == correct_VC1
+
+DG1 = DirectedGraph(7)
+DG1.add_edge(1,2)
+DG1.add_edge(2,3)
+DG1.add_edge(5,6)
+DG1.add_edge(4,1)
+assert has_cycle(DG1)
+
+DG2 = DirectedGraph(3)
+DG2.add_edge(1,2)
+DG2.add_edge(2,1)
+print(DG1.adj)
+assert not has_cycle(DG2)
