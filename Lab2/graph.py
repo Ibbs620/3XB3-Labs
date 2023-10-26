@@ -189,7 +189,7 @@ def is_connected(G):
     return all(reachable.values())
 
 ############################################
-# EXPERIMENT 1 
+# EXPERIMENT 1 HELPER CLASSES/FUNCTIONS
 ############################################
 
 # Directed graph class
@@ -213,10 +213,6 @@ def create_random_graph(nodes, edges):
         edge = possible_edges.pop()
         G.add_edge(edge[0], edge[1])
     return G
-
-############################################
-# EXPERIMENT 2
-############################################
 
 ############################################
 # VERTEX COVER APPROXIMATIONS
@@ -259,3 +255,17 @@ def approx2(G):
             G.remove_edge(u, v)
 
     return C  # Return the Vertex Cover set C
+
+############################################
+# MINIMAL INDEPENDANT SET
+############################################
+
+def MIS(G):
+    nodes = []
+    subsets = power_set(nodes)
+    max_cover = nodes
+    for subset in subsets:
+        if is_vertex_cover(G, subset):
+            if len(subset) > len(max_cover):
+                max_cover = subset
+    return max_cover
