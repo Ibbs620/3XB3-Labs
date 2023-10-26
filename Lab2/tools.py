@@ -1,4 +1,7 @@
 # Creates a dictionary for storing results
+from graph import *
+
+
 def initialize_results(x_axis):
     return {x: [] for x in x_axis}
 
@@ -11,3 +14,4 @@ def print_results(title, results, axis_title):
         data = [round(x, 6) for x in data]
         print(f"{value}\t\t{data}")
     print()
+    

@@ -1,4 +1,5 @@
 from collections import deque
+from tools import *
 import random
 
 #Undirected graph using an adjacency list
@@ -270,7 +271,8 @@ def create_random_graph(nodes, edges):
 def approx1(G):
     # C := {}
     C = set()
-    adj = G.adj.copy()
+    G1 = deep_copy(G)
+    adj = G1.adj
     while not is_vertex_cover(G, C):
         # Find vertex V with max degree
         V = 0
@@ -293,16 +295,10 @@ def approx2(G):
     C = set()  # Initialize an empty set C
     available_vertices = list(G.adj.keys())  
     
-    while available_vertices:  
+    while not is_vertex_cover(G, C):  
         v = random.choice(available_vertices)  # Random vertex from available vertices
         C.add(v)  # Add v to C
         available_vertices.remove(v)  # Remove v from the available vertices list
-
-        # Remove all edges incident to node v from G
-        incident_edges = list(G.adj[v])
-        for u in incident_edges:
-            G.remove_edge(u, v)
-
     return C  # Return the Vertex Cover set C
 
 def approx3(G):
@@ -351,3 +347,11 @@ def MIS(G):
             if len(subset) > len(max_cover):
                 max_cover = subset
     return max_cover
+
+def deep_copy(G):
+    graph_copy = Graph(len(G.adj))
+    for node in G.adj:
+        for neighbor in G.adj[node]:
+            if not graph_copy.are_connected(node, neighbor):
+                graph_copy.add_edge(node, neighbor)
+    return graph_copy
