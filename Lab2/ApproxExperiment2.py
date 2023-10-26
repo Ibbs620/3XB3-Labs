@@ -19,6 +19,10 @@ for edge in number_of_edges:
     results["approx2"].append(total_sizes["approx2"] / 1000)
     results["approx3"].append(total_sizes["approx3"] / 1000)
 
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 # Plotting the results
 plt.figure(figsize=(10, 6))
 plt.plot(number_of_edges, results["approx1"], marker='o', label="approx1")
@@ -26,7 +30,7 @@ plt.plot(number_of_edges, results["approx2"], marker='o', label="approx2")
 plt.plot(number_of_edges, results["approx3"], marker='o', label="approx3")
 plt.xlabel("Number of Edges")
 plt.ylabel("Average Vertex Cover Size")
-plt.title("Varying edges with nodes")
+plt.title("Varying Edges vs Nodes")
 plt.legend()
 plt.grid(True)
 plt.show()
