@@ -24,12 +24,12 @@ for node in number_of_nodes:
 
 # Plotting the results
 plt.figure(figsize=(10, 6))
-plt.plot(number_of_nodes, results["approx1"], marker='o', label="approx1")
-plt.plot(number_of_nodes, results["approx2"], marker='o', label="approx2")
-plt.plot(number_of_nodes, results["approx3"], marker='o', label="approx3")
+plt.plot(number_of_nodes, results["approx1"], marker='o', label="approx1()")
+plt.plot(number_of_nodes, results["approx2"], marker='o', label="approx2()")
+plt.plot(number_of_nodes, results["approx3"], marker='o', label="approx3()")
 plt.xlabel("Number of Nodes")
 plt.ylabel("Average Vertex Cover Size")
-plt.title("Approximation Experiment 1")
+plt.title("Varying nodes vs edges")
 plt.legend()
 plt.grid(True)
 plt.show()
