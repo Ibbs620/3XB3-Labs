@@ -184,43 +184,44 @@ def DFS3(G, start):
 #                 return True
 #     return False
 
-def has_cycle(G):
-    visited = {}
-    parent = {}
-    # The stack will store (node, parent) pairs
-    stack = []
-    for node in G.adj:
-        visited[node] = False
-        parent[node] = None
+# def has_cycle(G):
+#     visited = {}
+#     parent = {}
+#     # The stack will store (node, parent) pairs
+#     stack = []
+#     for node in G.adj:
+#         visited[node] = False
+#         parent[node] = None
 
-    for start_node in G.adj:
-        if not visited[start_node]:
-            stack.append((start_node, None))
+#     for start_node in G.adj:
+#         if not visited[start_node]:
+#             stack.append((start_node, None))
 
-            while stack:
-                node, parent_node = stack.pop()
-                visited[node] = True
-                parent[node] = parent_node
+#             while stack:
+#                 node, parent_node = stack.pop()
+#                 visited[node] = True
+#                 parent[node] = parent_node
 
-                for neighbor in G.adj[node]:
-                    if not visited[neighbor]:
-                        stack.append((neighbor, node))
-                    elif parent[node] != neighbor:
-                        return True
+#                 for neighbor in G.adj[node]:
+#                     if not visited[neighbor]:
+#                         stack.append((neighbor, node))
+#                     elif parent[node] != neighbor:
+#                         return True
                         
-    return False
+#     return False
 
-def DFS_cycle(G, v, marked, in_path):
-        marked[v] = True
-        in_path[v] = True
-        for neighbour in G.adj[v]:
+def DFS_cycle(G, node, marked, in_path):
+        marked[node] = True
+        in_path[node] = True
+        for neighbour in G.adj[node]:
+            print(node, neighbour)
             if marked[neighbour] == False:
                 if DFS_cycle(G, neighbour, marked, in_path) == True:
                     return True
             elif in_path[neighbour] == True:
                 return True
 
-        in_path[v] = False
+        in_path[node] = False
         return False
 
 def has_cycle(G):
