@@ -236,8 +236,15 @@ def has_cycle(G):
 
 def is_connected(G):
     start_node = list(G.adj.keys())[0]  # Choose any node as the starting point
-    reachable = BFS3(G, start_node)  # Or use DFS3
-    return all(reachable.values())
+    S = [start_node]
+    visited = [False] * G.number_of_nodes()
+    while S:
+        current = S.pop()
+        for node in G.adjacent_nodes(current):
+            if not visited[node]:
+                visited[node] = True
+                S.append(node)
+    return all(visited)
 
 ############################################
 # EXPERIMENT 1 HELPER CLASSES/FUNCTIONS
@@ -250,15 +257,15 @@ class DirectedGraph(Graph):
             self.adj[node1].append(node2)
 
 # Random directed graph generator
-def create_random_graph(nodes, edges):
-    edges = min(nodes * (nodes - 1), edges) # cap number of edges
+def create_random_graph(nodes, edges, directed = False):
     possible_edges = []
     for i in range(nodes):
-        for j in range(nodes):
+        for j in range(0 if directed else i + 1, nodes):
             if i == j: 
                 continue # avoid self loops
+
             possible_edges.append([i, j])
-    G = DirectedGraph(nodes)
+    G = DirectedGraph(nodes) if directed else Graph(nodes)
     random.shuffle(possible_edges)
     for i in range(edges):
         edge = possible_edges.pop()

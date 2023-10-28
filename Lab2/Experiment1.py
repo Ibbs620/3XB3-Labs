@@ -9,7 +9,7 @@ def experiment_1(num_nodes, num_graphs_per_edge):
     for edges in edge_counts:
         cycle_count = 0
         for _ in range(num_graphs_per_edge):
-            G = create_random_graph(num_nodes, edges)
+            G = create_random_graph(num_nodes, edges, True)
             if has_cycle(G):
                 cycle_count += 1
         probability = round(cycle_count / num_graphs_per_edge, 10)
