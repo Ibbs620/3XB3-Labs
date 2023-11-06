@@ -1,6 +1,11 @@
 # Create a random list length "length" containing whole numbers between 0 and max_value inclusive
 import random
 import time
+# Helper function to calculate the total weight and value of a subset of items
+def total_weight_value(subset):
+    total_weight = sum(item[0] for item in subset)
+    total_value = sum(item[1] for item in subset)
+    return total_weight, total_value
 
 # Returns the runtime of a sorting algorithm on L
 def measure_runtime(sorting_algorithm, L):
