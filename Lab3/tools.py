@@ -7,10 +7,10 @@ def total_weight_value(subset):
     total_value = sum(item[1] for item in subset)
     return total_weight, total_value
 
-# Returns the runtime of a sorting algorithm on L
-def measure_runtime(sorting_algorithm, L):
+# Returns the runtime of an algorithm on a knapsack problem
+def measure_runtime(sorting_algorithm, items, weight):
     start_time = time.perf_counter()
-    sorting_algorithm(L)
+    sorting_algorithm(items, weight)
     end_time = time.perf_counter()
     return end_time - start_time
 
@@ -31,7 +31,7 @@ def print_results(title, results, axis_title):
 
 # Generate random knapsack problem
 def generate_knapsack(N):
-    W = random.randint(N + 1, N ** 2 // 2)
+    W = random.randint(N + 1, max(N ** 2 // 2, N + 3))
     possible_weights = list(range(1,W))
     possible_values = list(range(1,W))
     items = []
@@ -43,17 +43,8 @@ def generate_knapsack(N):
         items.append((weight, value))
         possible_values
     return items, W
-
-
-
-    
-
-
-
 # Constants
+item_set_sizes = list(range(2, 21, 2))
+max_weight = 50
+max_value = 100
 num_runs = 10
-max_value = 50000
-list_lengths_gs = [500, 1000, 2000, 5000, 10000, 50000]
-list_lengths_bs = [100, 500, 1000, 2000, 5000, 10000]
-fixed_list_length = 1000
-swaps = [10, 50, 100, 500, 1000, 5000]
