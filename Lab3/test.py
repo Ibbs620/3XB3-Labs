@@ -7,7 +7,7 @@ kps = [ {'items': [(4,5),(3,4),(5,8),(2,3)], 'cap': 9, 'sol': 13},
         {'items': [(5, 10) ,(6, 12), (10, 20)], 'cap': 5, 'sol': 10} ]
 
 # Add your function in here once its complete to test it
-completed = [ks_rec]
+completed = [ks_rec, ks_bottom_up, ks_top_down, ks_brute_force]
 
 for func in completed: 
     for i in range(len(kps)): 
