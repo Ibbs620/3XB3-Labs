@@ -184,43 +184,44 @@ def DFS3(G, start):
 #                 return True
 #     return False
 
-def has_cycle(G):
-    visited = {}
-    parent = {}
-    # The stack will store (node, parent) pairs
-    stack = []
-    for node in G.adj:
-        visited[node] = False
-        parent[node] = None
+# def has_cycle(G):
+#     visited = {}
+#     parent = {}
+#     # The stack will store (node, parent) pairs
+#     stack = []
+#     for node in G.adj:
+#         visited[node] = False
+#         parent[node] = None
 
-    for start_node in G.adj:
-        if not visited[start_node]:
-            stack.append((start_node, None))
+#     for start_node in G.adj:
+#         if not visited[start_node]:
+#             stack.append((start_node, None))
 
-            while stack:
-                node, parent_node = stack.pop()
-                visited[node] = True
-                parent[node] = parent_node
+#             while stack:
+#                 node, parent_node = stack.pop()
+#                 visited[node] = True
+#                 parent[node] = parent_node
 
-                for neighbor in G.adj[node]:
-                    if not visited[neighbor]:
-                        stack.append((neighbor, node))
-                    elif parent[node] != neighbor:
-                        return True
+#                 for neighbor in G.adj[node]:
+#                     if not visited[neighbor]:
+#                         stack.append((neighbor, node))
+#                     elif parent[node] != neighbor:
+#                         return True
                         
-    return False
+#     return False
 
-def DFS_cycle(G, v, marked, in_path):
-        marked[v] = True
-        in_path[v] = True
-        for neighbour in G.adj[v]:
+def DFS_cycle(G, node, marked, in_path):
+        marked[node] = True
+        in_path[node] = True
+        for neighbour in G.adj[node]:
+            print(node, neighbour)
             if marked[neighbour] == False:
                 if DFS_cycle(G, neighbour, marked, in_path) == True:
                     return True
             elif in_path[neighbour] == True:
                 return True
 
-        in_path[v] = False
+        in_path[node] = False
         return False
 
 def has_cycle(G):
@@ -235,8 +236,15 @@ def has_cycle(G):
 
 def is_connected(G):
     start_node = list(G.adj.keys())[0]  # Choose any node as the starting point
-    reachable = BFS3(G, start_node)  # Or use DFS3
-    return all(reachable.values())
+    S = [start_node]
+    visited = [False] * G.number_of_nodes()
+    while S:
+        current = S.pop()
+        for node in G.adjacent_nodes(current):
+            if not visited[node]:
+                visited[node] = True
+                S.append(node)
+    return all(visited)
 
 ############################################
 # EXPERIMENT 1 HELPER CLASSES/FUNCTIONS
@@ -249,15 +257,15 @@ class DirectedGraph(Graph):
             self.adj[node1].append(node2)
 
 # Random directed graph generator
-def create_random_graph(nodes, edges):
-    edges = min(nodes * (nodes - 1), edges) # cap number of edges
+def create_random_graph(nodes, edges, directed = False):
     possible_edges = []
     for i in range(nodes):
-        for j in range(nodes):
+        for j in range(0 if directed else i + 1, nodes):
             if i == j: 
                 continue # avoid self loops
+
             possible_edges.append([i, j])
-    G = DirectedGraph(nodes)
+    G = DirectedGraph(nodes) if directed else Graph(nodes)
     random.shuffle(possible_edges)
     for i in range(edges):
         edge = possible_edges.pop()

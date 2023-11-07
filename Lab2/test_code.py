@@ -30,24 +30,73 @@ assert correct_path_dfs == dfs_path
 print(dfs_path)
 print(bfs_path)
 
+# is_connected testing
+assert not is_connected(G)
+G.add_edge(0, 1)
+assert is_connected(G)
+
+
 # CHECK create_random_graph() OUTPUT
-print(create_random_graph(10, 15).adj)
+print(create_random_graph(10, 15, True).adj)
+print(create_random_graph(10, 15, False).adj)
 
 # Test VC approximations (can only test approx1 since the other implementations are random)
 correct_VC1 = {1, 3, 4}
 VC1 = approx1(G)
 assert VC1 == correct_VC1
 
-DG1 = DirectedGraph(7)
-DG1.add_edge(1,2)
-DG1.add_edge(2,3)
-DG1.add_edge(5,6)
-DG1.add_edge(4,1)
-assert not has_cycle(DG1)
 
-DG2 = DirectedGraph(3)
-DG2.add_edge(1,2)
-DG2.add_edge(2,0)
-DG2.add_edge(0,1)
-print(DG2.adj)
-assert has_cycle(DG2)
+G1 = Graph(7)
+G1.add_edge(1,2)
+G1.add_edge(2,3)
+G1.add_edge(5,6)
+G1.add_edge(4,1)
+assert not has_cycle(G1)
+
+G2 = Graph(3)
+G2.add_edge(1,2)
+G2.add_edge(2,0)
+G2.add_edge(0,1)
+print(G2.adj)
+assert has_cycle(G2)
+
+
+##############################################################################################################################
+# has_cycle testing code
+#############################################################################################################################
+
+def test_case_1():
+    G = Graph(4)
+    G.add_edge(0, 1)
+    G.add_edge(1, 2)
+    G.add_edge(2, 3)
+    G.add_edge(3, 0)
+    
+    assert has_cycle(G) == True, "Test Case 1 Failed"
+
+# A tree structure (acyclic graph)
+def test_case_2():
+    G = Graph(4)
+    G.add_edge(0, 1)
+    G.add_edge(1, 2)
+    G.add_edge(1, 3)
+    
+    assert has_cycle(G) == False, "Test Case 2 Failed"
+
+# A disconnected graph with one component having a cycle
+def test_case_3():
+    G = Graph(5)
+    G.add_edge(0, 1)
+    G.add_edge(1, 2)
+    G.add_edge(2, 0)
+    # The graph has another component with nodes 3 and 4 which are disconnected from the main graph and from each other
+    
+    assert has_cycle(G) == True, "Test Case 3 Failed"
+
+def run_tests():
+    test_case_1()
+    test_case_2()
+    test_case_3()
+    print("All Test Cases Passed!")
+
+run_tests()
