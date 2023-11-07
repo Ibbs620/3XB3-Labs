@@ -1,5 +1,6 @@
 from itertools import combinations
 from tools import *
+from typing import List, Tuple
 
 def ks_brute_force(items: [(int,int)], capacity: int) -> int:
     max_value = 0
@@ -24,9 +25,40 @@ def ks_rec(items: [(int,int)], capacity: int) -> int:
     return recurse(len(items), capacity)
     
 
-def ks_bottom_up(items: [(int,int)], capacity: int) -> int:
-    pass
+def ks_bottom_up(items: List[Tuple[int, int]], capacity: int) -> int:
+    n = len(items)
+    dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
 
-def ks_top_down(items: [(int,int)], capacity: int) -> int:
-    pass
+    for i in range(1, n + 1):
+        for w in range(1, capacity + 1):
+            weight, value = items[i - 1]
+            if weight <= w:
+                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weight] + value)
+            else:
+                dp[i][w] = dp[i - 1][w]
 
+    return dp[n][capacity]
+
+def ks_top_down(items: List[Tuple[int, int]], capacity: int) -> int:
+    n = len(items)
+    memo = {}
+
+    def knapsack_recursive(i, w):
+        if i == 0 or w == 0:
+            return 0
+        if (i, w) in memo:
+            return memo[(i, w)]
+
+        weight, value = items[i - 1]
+
+        if weight <= w:
+            included = knapsack_recursive(i - 1, w - weight) + value
+            excluded = knapsack_recursive(i - 1, w)
+            result = max(included, excluded)
+        else:
+            result = knapsack_recursive(i - 1, w)
+
+        memo[(i, w)] = result
+        return result
+
+    return knapsack_recursive(n, capacity)
