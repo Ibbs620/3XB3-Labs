@@ -63,3 +63,31 @@ def ks_top_down(items: List[Tuple[int, int]], capacity: int) -> int:
 
     return knapsack_recursive(n, capacity)
 
+######################################################################################
+######################################################################################
+# PART 2 FUNCTIONS
+######################################################################################
+######################################################################################
+
+def num_of_wc_runs(n, m):
+    # Initialize a table where dp[i][j] represents the minimum number of tests
+    dp = [[0 for _ in range(m+1)] for _ in range(n+1)]
+
+    # Base cases:
+    for j in range(m+1):
+        dp[0][j] = 0
+    for i in range(1, n+1):
+        dp[i][1] = i - 1
+        
+    # Fill the table using the bottom-up approach.
+    for i in range(2, n+1):  
+        for j in range(2, m+1): 
+            dp[i][j] = float('inf')  
+            for x in range(1, i):  
+                worst_case = 1 + max(dp[x-1][j-1], dp[i-x][j])
+                # We want the minimum of the worst cases.
+                dp[i][j] = min(dp[i][j], worst_case)
+
+    # for n levels and m bricks, which is stored in dp[n][m].
+    return dp[n][m]
+
