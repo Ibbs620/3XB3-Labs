@@ -1,6 +1,6 @@
 from itertools import combinations
-from tools import *
 from typing import List, Tuple
+from tools import *
 
 def ks_brute_force(items: [(int,int)], capacity: int) -> int:
     max_value = 0
@@ -62,3 +62,4 @@ def ks_top_down(items: List[Tuple[int, int]], capacity: int) -> int:
         return result
 
     return knapsack_recursive(n, capacity)
+
