@@ -13,8 +13,9 @@ def next_setting(n, m):
     next_k = -1
     min_runs = float('inf')
     for k in range(1, n + 1):
-        if dp[m][k] < min_runs:
-            min_runs = dp[m][k]
+        val = 1 + max(dp[m - 1][k - 1], dp[m][n - k])
+        if val < min_runs:
+            min_runs = val
             next_k = k
 
     return next_k
