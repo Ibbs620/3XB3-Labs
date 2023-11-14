@@ -4,3 +4,4 @@ __pycache__
 Lab1/__pycache__/*
 Lab1/__pycache__/bad_sorts.cpython-311.pyc
 .vscode
+*.pdf
