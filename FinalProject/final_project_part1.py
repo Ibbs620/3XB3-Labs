@@ -115,7 +115,9 @@ def init_d(G):
         d[i][i] = 0
     return d
 
-
+########################################################################################################################################################################
+# PART 1 IMPLEMENTATIONS
+########################################################################################################################################################################
 def dijkstra_approx(G, source, k):
     pred = {}  # Predecessor dictionary
     dist = {}  # Distance dictionary
@@ -123,7 +125,6 @@ def dijkstra_approx(G, source, k):
     Q = min_heap2.MinHeap([])
     nodes = list(G.adj.keys())
 
-    # Initialize
     for node in nodes:
         Q.insert(min_heap2.Element(node, float("inf")))
         dist[node] = float("inf")
@@ -153,13 +154,12 @@ def bellman_ford_approx(G, source, k):
     relax_count = {}  # Relaxation count dictionary
     nodes = list(G.adj.keys())
 
-    # Initialize
     for node in nodes:
         dist[node] = float("inf")
         relax_count[node] = 0
     dist[source] = 0
 
-    for _ in range(k):  # Limit the number of relaxations to k
+    for _ in range(k): 
         for node in nodes:
             for neighbour in G.adj[node]:
                 if dist[neighbour] > dist[node] + G.w(node, neighbour):
