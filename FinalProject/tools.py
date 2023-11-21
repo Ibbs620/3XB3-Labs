@@ -10,24 +10,6 @@ def measure_runtime(algorithm, graph):
     end_time = time.perf_counter()
     return end_time - start_time
 
-# Creates a random DWG
-def create_random_graph(nodes, edges, min_weight = 1, max_weight = 10):
-    possible_edges = []
-    for i in range(nodes):
-        for j in range(nodes):
-            if i == j: 
-                continue # avoid self loops
-
-            possible_edges.append([i, j, random.randint(min_weight, max_weight)])
-    G = DirectedWeightedGraph()
-    for i in range(nodes):
-        G.add_node(i)
-    random.shuffle(possible_edges)
-    for i in range(edges):
-        edge = possible_edges.pop()
-        G.add_edge(edge[0], edge[1], edge[2])
-    return G
-
 # Creates a dictionary for storing results
 def initialize_results(x_axis):
     return {x: 0 for x in x_axis}
