@@ -146,3 +146,27 @@ def dijkstra_approx(G, source, k):
                 relax_count[neighbour] += 1
 
     return dist
+
+def bellman_ford_approx(G, source, k):
+    pred = {}  # Predecessor dictionary
+    dist = {}  # Distance dictionary
+    relax_count = {}  # Relaxation count dictionary
+    nodes = list(G.adj.keys())
+
+    # Initialize
+    for node in nodes:
+        dist[node] = float("inf")
+        relax_count[node] = 0
+    dist[source] = 0
+
+    for _ in range(k):  # Limit the number of relaxations to k
+        for node in nodes:
+            for neighbour in G.adj[node]:
+                if dist[neighbour] > dist[node] + G.w(node, neighbour):
+                    dist[neighbour] = dist[node] + G.w(node, neighbour)
+                    pred[neighbour] = node
+                    relax_count[neighbour] += 1
+                    if relax_count[neighbour] >= k:
+                        break
+
+    return dist
