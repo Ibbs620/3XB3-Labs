@@ -114,3 +114,35 @@ def init_d(G):
                 d[i][j] = G.w(i, j)
         d[i][i] = 0
     return d
+
+
+def dijkstra_approx(G, source, k):
+    pred = {}  # Predecessor dictionary
+    dist = {}  # Distance dictionary
+    relax_count = {}  # Relaxation count dictionary
+    Q = min_heap2.MinHeap([])
+    nodes = list(G.adj.keys())
+
+    # Initialize
+    for node in nodes:
+        Q.insert(min_heap2.Element(node, float("inf")))
+        dist[node] = float("inf")
+        relax_count[node] = 0
+    Q.decrease_key(source, 0)
+
+    while not Q.is_empty():
+        current_element = Q.extract_min()
+        current_node = current_element.value
+
+        if relax_count[current_node] >= k:
+            continue
+
+        dist[current_node] = current_element.key
+        for neighbour in G.adj[current_node]:
+            if dist[current_node] + G.w(current_node, neighbour) < dist[neighbour]:
+                Q.decrease_key(neighbour, dist[current_node] + G.w(current_node, neighbour))
+                dist[neighbour] = dist[current_node] + G.w(current_node, neighbour)
+                pred[neighbour] = current_node
+                relax_count[neighbour] += 1
+
+    return dist
