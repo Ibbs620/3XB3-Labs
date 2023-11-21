@@ -14,4 +14,3 @@ def number_of_wc_runs(n, m):
     return dp[m][n]
 
 print(number_of_wc_runs(100,2))
-
