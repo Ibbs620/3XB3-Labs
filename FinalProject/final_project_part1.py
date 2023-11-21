@@ -1,4 +1,4 @@
-import min_heap
+import min_heap2
 import random
 
 class DirectedWeightedGraph:
@@ -35,12 +35,12 @@ class DirectedWeightedGraph:
 def dijkstra(G, source):
     pred = {} #Predecessor dictionary. Isn't returned, but here for your understanding
     dist = {} #Distance dictionary
-    Q = min_heap.MinHeap([])
+    Q = min_heap2.MinHeap([])
     nodes = list(G.adj.keys())
 
     #Initialize priority queue/heap and distances
     for node in nodes:
-        Q.insert(min_heap.Element(node, float("inf")))
+        Q.insert(min_heap2.Element(node, float("inf")))
         dist[node] = float("inf")
     Q.decrease_key(source, 0)
 
