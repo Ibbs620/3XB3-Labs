@@ -9,16 +9,14 @@ k_values = [1, 2, 5, 10, 20]  # Different values for k
 dijkstra_times = []
 bellman_ford_times = []
 
-# Create a graph with a constant number of nodes and random edges
 G = DirectedWeightedGraph()
 for node in range(constant_graph_size):
     G.add_node(node)
 for node1 in range(constant_graph_size):
     for node2 in range(constant_graph_size):
-        if node1 != node2 and random.random() < 0.3:  # 30% chance to create an edge
+        if node1 != node2 and random.random() < 0.3:
             G.add_edge(node1, node2, random.randint(1, 10))
 
-# Run experiments for different values of k
 for k in k_values:
     # Measure time for dijkstra_approx
     start_time = time.time()
