@@ -10,9 +10,7 @@ k_value = 5  # Fixed value for k
 dijkstra_times = []
 bellman_ford_times = []
 
-# Run experiments for different edge densities
 for density in edge_densities:
-    # Create a graph with a constant number of nodes and varying densities of edges
     G = DirectedWeightedGraph()
     for node in range(constant_graph_size):
         G.add_node(node)
