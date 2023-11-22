@@ -16,7 +16,7 @@ for size in graph_sizes:
         G.add_node(node)
     for node1 in range(size):
         for node2 in range(size):
-            if node1 != node2 and random.random() < 0.3:  # 30% chance to create an edge
+            if node1 != node2 and random.random() < 0.3:
                 G.add_edge(node1, node2, random.randint(1, 10))
 
     # Measure time for dijkstra_approx
