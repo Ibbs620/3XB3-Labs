@@ -4,7 +4,7 @@ from final_project_part1 import DirectedWeightedGraph
 def build_graph(stations_filename, connections_filename):
     graph = DirectedWeightedGraph()
     id_to_name = {}
-    
+
     with open(stations_filename, 'r') as stations_file:
         reader = csv.reader(stations_file)
         next(reader)  
@@ -13,7 +13,6 @@ def build_graph(stations_filename, connections_filename):
             graph.add_node(name)
             id_to_name[int(id)] = name
 
-    # Read connection data from CSV and add edges to the graph
     with open(connections_filename, 'r') as connections_file:
         reader = csv.reader(connections_file)
         next(reader)  # Skip header row
