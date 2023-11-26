@@ -1,9 +1,12 @@
 import csv
-from final_project_part1 import DirectedWeightedGraph
+from final_project_part1 import DirectedWeightedGraph, a_star
 
-def build_graph(stations_filename, connections_filename):
+def build_graph(stations_filename, connections_filename, sink):
     graph = DirectedWeightedGraph()
     id_to_name = {}
+    h = {}
+    sink_lat = None
+    sink_long = None
 
     with open(stations_filename, 'r') as stations_file:
         reader = csv.reader(stations_file)
@@ -12,6 +15,18 @@ def build_graph(stations_filename, connections_filename):
             id, lat, long, name, display_name, zone, total_lines, rail = row
             graph.add_node(name)
             id_to_name[int(id)] = name
+            if name == sink:
+                sink_lat = float(lat)
+                sink_long = float(long)
+        
+        stations_file.seek(0)
+        next(reader)
+        for row in reader:
+            id, lat, long, name, display_name, zone, total_lines, rail = row
+            lat = float(lat)
+            long = float(long)
+            h[name] = ((lat - sink_lat) ** 2 + (long - sink_long) ** 2) ** 0.5
+
 
     with open(connections_filename, 'r') as connections_file:
         reader = csv.reader(connections_file)
@@ -21,13 +36,15 @@ def build_graph(stations_filename, connections_filename):
             name1 = id_to_name[int(station1)]
             name2 = id_to_name[int(station2)]
             graph.add_edge(name1, name2, int(time))
+            graph.add_edge(name2, name1, int(time))
 
-    return graph
-
+    return graph, h
 
 stations_filename = 'london_stations.csv'
-connections_filename = 'London_connections.csv'
+connections_filename = 'london_connections.csv'
 
-graph = build_graph(stations_filename, connections_filename)
+graph, h = build_graph(stations_filename, connections_filename, 'Ruislip Manor')
 
 print(graph.number_of_nodes())
+# print(graph.adj)
+print(a_star(graph, 'Clapham South', 'Ruislip Manor', h)[1])
