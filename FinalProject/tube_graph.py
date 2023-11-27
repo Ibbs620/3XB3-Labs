@@ -40,11 +40,8 @@ def build_graph(stations_filename, connections_filename, sink):
 
     return graph, h
 
-stations_filename = 'london_stations.csv'
-connections_filename = 'london_connections.csv'
+# graph, h = build_graph(stations_filename, connections_filename, 'Ruislip Manor')
 
-graph, h = build_graph(stations_filename, connections_filename, 'Ruislip Manor')
-
-print(graph.number_of_nodes())
-# print(graph.adj)
-print(a_star(graph, 'Clapham South', 'Ruislip Manor', h)[1])
+# print(graph.number_of_nodes())
+# # print(graph.adj)
+# print(a_star(graph, 'Clapham South', 'Ruislip Manor', h)[1])
