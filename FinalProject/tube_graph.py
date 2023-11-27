@@ -47,6 +47,7 @@ def compute_h(stations_filename, sink):
             lat = float(lat)
             long = float(long)
             h[name] = ((lat - sink_lat) ** 2 + (long - sink_long) ** 2) ** 0.5
+    return h
 
 
 # graph, h = build_graph(stations_filename, connections_filename, 'Ruislip Manor')
