@@ -183,7 +183,7 @@ def a_star(G, s, d, h):
     for node in nodes:
         Q.insert(min_heap2.Element(node, float("inf")))
         dist[node] = float("inf")
-    Q.decrease_key(s, 0)
+    Q.decrease_key(s, h[s])
 
     while not Q.is_empty():
         current_element = Q.extract_min()
@@ -201,5 +201,7 @@ def a_star(G, s, d, h):
     while next != s:
         next = pred[next]
         path.insert(0, next)
+    for node in path:
+        print(dist[node])
 
     return pred, path
