@@ -29,7 +29,7 @@ stations_filename = 'london_stations.csv'
 connections_filename = 'london_connections.csv'
 graph = build_graph(stations_filename, connections_filename, 'Ruislip Manor')
 
-dijkstra_times, a_star_times = run_experiment(graph)
+dijkstra_times, a_star_times = run_experiment(graph, stations_filename)
 
 plt.scatter(dijkstra_times, a_star_times)
 plt.xlabel('Dijkstra Runtime (s)')
