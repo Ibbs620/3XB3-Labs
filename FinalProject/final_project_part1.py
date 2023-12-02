@@ -188,9 +188,9 @@ def a_star(G, s, d, h):
     while not Q.is_empty():
         current_element = Q.extract_min()
         current_node = current_element.value
+        dist[current_node] = current_element.key - h[current_node]
         if current_node == d:
             break
-        dist[current_node] = current_element.key - h[current_node]
         for neighbour in G.adj[current_node]:
             if dist[current_node] + G.w(current_node, neighbour) < dist[neighbour]:
                 Q.decrease_key(neighbour, dist[current_node] + G.w(current_node, neighbour) + h[neighbour])
