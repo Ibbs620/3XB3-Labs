@@ -66,7 +66,7 @@ class Bellman_Ford(SPAlgorithm):
             current = pred.get(current)
         path.insert(0, source)
         return path
-
+ 
 
 class A_Star(SPAlgorithm):
     def __init__(self, heuristic):
