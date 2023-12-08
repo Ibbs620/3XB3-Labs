@@ -18,10 +18,6 @@ class Graph(ABC):
     def get_num_of_nodes(self) -> int:
         pass
 
-    @abstractmethod
-    def w(self, node1: int, node2: int) -> float:
-        pass
-
 class WeightedGraph(Graph):
     def __init__(self):
         self.adj = {}
@@ -43,3 +39,13 @@ class WeightedGraph(Graph):
 
     def w(self, node1: int, node2: int) -> float:
         return self.weights.get((node1, node2), 0.0)
+    
+class HeuristicGraph(WeightedGraph):
+    def __init__(self, heuristic):
+        super().__init__()
+        self.__heuristic = heuristic
+
+    def get_heuristic(self):
+        return self.heuristic
+
+
