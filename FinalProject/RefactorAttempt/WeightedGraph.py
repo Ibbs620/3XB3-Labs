@@ -41,11 +41,13 @@ class WeightedGraph(Graph):
         return self.weights.get((node1, node2), 0.0)
     
 class HeuristicGraph(WeightedGraph):
-    def __init__(self, heuristic):
+    def __init__(self):
         super().__init__()
-        self.__heuristic = heuristic
+        self.heuristic: Dict[int, float] = {}  
+    def set_heuristic(self, heuristic: Dict[int, float]):
+        self.heuristic = heuristic
 
-    def get_heuristic(self):
-        return self.heuristic
+    def get_heuristic(self, node: int) -> float:
+        return self.heuristic.get(node, 0.0)
 
 
